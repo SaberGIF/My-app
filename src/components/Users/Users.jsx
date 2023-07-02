@@ -2,6 +2,9 @@ import React from "react";
 import styles from "./Users.module.css";
 import userImage from "../../assets/images/usersImage.png";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+import { getFollow, getUnfollow, usersAPI } from "../../api/Api";
+import { follow, unfollow } from "../../redux/users-reducer";
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -31,31 +34,23 @@ const Users = (props) => {
         <div key={u.id}>
           <span>
             <div>
-              <NavLink to={"/profile/"  + u.id}>
-              <img
-                src={u.photos.small != null ? u.photos.small : userImage}
-                className={styles.userPhoto}
-              />
+              <NavLink to={"/profile/" + u.id}>
+                <img
+                  src={u.photos.small != null ? u.photos.small : userImage}
+                  className={styles.userPhoto}
+                />
               </NavLink>
             </div>
             <div>
               {u.followed ? (
                 <button
+                  disabled={props.followingInProgress.some((id) => id === u.id)}
                   onClick={() => {
-                    props.unfollow(u.id);
-                  }}
-                >
-                  Unfollow
-                </button>
-              ) : (
-                <button
+                   props.unfollow(u.id)}}>Unfollow</button>) :
+                (<button
+                  disabled={props.followingInProgress.some((id) => id === u.id)}
                   onClick={() => {
-                    props.follow(u.id);
-                  }}
-                >
-                  Follow
-                </button>
-              )}
+                   props.follow(u.id)}}>Follow</button>)}
             </div>
           </span>
           <span>
