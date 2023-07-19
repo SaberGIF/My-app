@@ -12,7 +12,7 @@ const ProfileInfo = (props) => {
       <img alt="background" src='https://png.pngtree.com/thumb_back/fh260/background/20200621/pngtree-abstract-modern-neon-frame-background-image_339537.jpg'></img>
       <div className={s.descriptionBar}>
         <img alt="users avatar" src={props.profile.photos.large} />
-        <ProfileStatus status={"Hello my friends!"} />
+        <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
       </div> 
     </div>
   );
