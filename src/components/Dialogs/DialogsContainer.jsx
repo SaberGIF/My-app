@@ -1,11 +1,4 @@
-import { NavLink } from "react-router-dom";
-import React from "react";
-import {
-  addMessageActionCreator,
-  sendMessageCreator,
-  updateNewMessageBodyActionCreator,
-  updateNewMessageBodyCreator,
-} from "../../redux/dialogs-reducer";
+import { sendMessage } from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import { connect } from "react-redux";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
@@ -19,11 +12,8 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    updateNewMessageBodyCreator: (body) => {
-      dispatch(updateNewMessageBodyCreator(body));
-    },
-    sendMessageCreator: () => {
-      dispatch(sendMessageCreator());
+    sendMessage: (newMessageBody) => {
+      dispatch(sendMessage(newMessageBody));
     },
   };
 };
